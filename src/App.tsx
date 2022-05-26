@@ -7,32 +7,23 @@
  *
  * @format
  */
-
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
-import {Text} from 'react-native-ui-lib';
+import {StyleSheet, View} from 'react-native';
+import HelloWorld from './components/HelloWorld';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+export default function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        <Text> Hello World</Text>
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <HelloWorld />
+    </View>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
