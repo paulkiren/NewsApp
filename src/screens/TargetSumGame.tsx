@@ -5,46 +5,14 @@ import {View, StyleSheet} from 'react-native';
 import {Text} from 'react-native-ui-lib';
 import RandomNumber from '../components/RandomNumber';
 
-export interface ITargetSum {
+export type ITargetSumProps = {
   randomNumeberCount: number;
-}
-const randomNumeberCount = 6;
-const randomNumbers = Array.from({length: 6}).map(
-  () => 1 + Math.floor(10 * Math.random()),
-);
-const targetValue = randomNumbers
-  .slice(1, randomNumeberCount - 2)
-  .reduce((a, b) => a + b, 0);
-const TargetSum = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState<Array<number>>([]);
-  React. useEffect(() => {
-    setSelectedIndex([]);
-  }, []);
-
-  const isNumberSelected = (numberIndex: number) =>
-    selectedIndex.includes(numberIndex);
-
-  const selectNumber = (numberIndex: number) =>
-    setSelectedIndex([...selectedIndex, numberIndex]);
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{targetValue}</Text>
-      <View style={styles.randomContainer}>
-        {randomNumbers.map((randomNumber, index) => {
-          return (
-            <RandomNumber
-              key={index}
-              id={index}
-              number={randomNumber}
-              isDsabled={isNumberSelected(index)}
-              onSelect={selectNumber}
-            />
-          );
-        })}
-      </View>
-    </View>
-  );
 };
+export type ITargetSumState = {
+  selectedIndex: Array<number>;
+};
+const randomNumeberCount = 7;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -61,5 +29,47 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
+  // selectedIndex: Array<number> = [];
+
+  randomNumbers = Array.from({length: randomNumeberCount}).map(
+    () => 1 + Math.floor(10 * Math.random()),
+  );
+  targetValue = this.randomNumbers
+    .slice(1, randomNumeberCount - 2)
+    .reduce((a, b) => a + b, 0);
+
+  constructor(props: ITargetSumProps | Readonly<ITargetSumProps>) {
+    super(props);
+    this.state = {
+      selectedIndex: [],
+    };
+  }
+  isNumberSelected = (numberIndex: number) =>
+    this.state.selectedIndex.includes(numberIndex);
+
+  selectNumber = (numberIndex: number) =>
+    this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{this.targetValue}</Text>
+        <View style={styles.randomContainer}>
+          {this.randomNumbers.map((randomNumber, index) => {
+            return (
+              <RandomNumber
+                key={index}
+                id={index}
+                number={randomNumber}
+                isDsabled={this.isNumberSelected(index)}
+                onSelect={this.selectNumber}
+              />
+            );
+          })}
+        </View>
+      </View>
+    );
+  }
+}
 
 export default TargetSum;
