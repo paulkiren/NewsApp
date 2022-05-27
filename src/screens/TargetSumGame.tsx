@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FEFEFE',
     flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   text: {
     color: 'orange',
@@ -31,13 +33,12 @@ const styles = StyleSheet.create({
   },
 });
 class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
-  // selectedIndex: Array<number> = [];
 
   randomNumbers = Array.from({length: randomNumeberCount}).map(
     () => 1 + Math.floor(10 * Math.random()),
   );
   targetValue = this.randomNumbers
-    .slice(1, randomNumeberCount - 2)
+    .slice(0, randomNumeberCount - 2)
     .reduce((a, b) => a + b, 0);
 
   constructor(props: ITargetSumProps | Readonly<ITargetSumProps>) {
@@ -52,7 +53,7 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
     this.state.selectedIndex.reduce((a, b) => a + this.randomNumbers[b], 0);
   selectNumber = (numberIndex: number) =>
    { this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
-  console.log("Sum ", this.calcSelectedNumberSum());
+  console.log("Sum _ ", this.calcSelectedNumberSum());
   }
   render() {
     return (
@@ -66,12 +67,12 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
                 id={index}
                 number={randomNumber}
                 isDsabled={this.isNumberSelected(index)}
-                onSelect={this.selectNumber}
+                onSelect={this.selectNumber }
               />
             );
           })}
         </View>
-        <Text style={styles.text}>{this.targetValue}</Text>
+        <Text style={styles.text}>{this.calcSelectedNumberSum()}</Text>
       </View>
     );
   }

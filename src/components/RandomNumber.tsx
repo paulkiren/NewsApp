@@ -17,33 +17,29 @@ const RandomNumber = (props: IRandomNumber) => {
     }
   };
   return (
-    <View style={styles.container}>
       <TouchableOpacity onPress={() => onItemPress()}>
         <Text style={[styles.text, props.isDsabled && styles.isDisable]}>
           {props.number}
         </Text>
+        {/* <Text>{props.id}</Text> */}
       </TouchableOpacity>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-    flexWrap: 'wrap',
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
   text: {
     color: 'green',
     fontSize: 66,
     fontWeight: '300',
+    width: 100,
+    marginHorizontal: 15,
+    marginVertical: 25,
+    textAlign: 'center',
     // backgroundColor: 'orange',
   },
   isDisable: {
     opacity: 0.3,
+    color:'blue'
   },
 });
 export default RandomNumber;
