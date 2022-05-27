@@ -3,7 +3,7 @@ package com.newsapp;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-
+import android.os.Bundle;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -28,7 +28,10 @@ public class MainActivity extends ReactActivity {
     public MainActivityDelegate(ReactActivity activity, String mainComponentName) {
       super(activity, mainComponentName);
     }
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(null);
+    }
     @Override
     protected ReactRootView createRootView() {
       ReactRootView reactRootView = new ReactRootView(getContext());
