@@ -8,15 +8,19 @@ import RandomNumber from '../components/RandomNumber';
 export interface ITargetSum {
   randomNumeberCount: number;
 }
+const randomNumeberCount = 6;
+const randomNumbers = Array.from({length: 6}).map(
+  () => 1 + Math.floor(10 * Math.random()),
+);
+const targetValue = randomNumbers
+  .slice(1, randomNumeberCount - 2)
+  .reduce((a, b) => a + b, 0);
 const TargetSum = () => {
-  const randomNumeberCount = 6;
-  const randomNumbers = Array.from({length: 6}).map(
-    item => 1 + Math.floor(10 * Math.random()),
-  );
-  const targetValue = randomNumbers
-    .slice(1, randomNumeberCount - 2)
-    .reduce((a, b) => a + b, 0);
   const [selectedIndex, setSelectedIndex] = React.useState<Array<number>>([]);
+  React. useEffect(() => {
+    setSelectedIndex([]);
+  }, []);
+
   const isNumberSelected = (numberIndex: number) =>
     selectedIndex.includes(numberIndex);
 
@@ -33,7 +37,7 @@ const TargetSum = () => {
               id={index}
               number={randomNumber}
               isDsabled={isNumberSelected(index)}
-              onPress={selectNumber}
+              onSelect={selectNumber}
             />
           );
         })}

@@ -1,19 +1,28 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-export interface IRandomNumber  {
-  key:number;
-  id:number;
-  number:Array<number>;
-  isDsabled:boolean;
-  onPress:void;
+export interface IRandomNumber {
+  key: number;
+  id: number;
+  number: number;
+  isDsabled: boolean;
+  onSelect: any;
 }
 
-const RandomNumber = (props:IRandomNumber) => {
+const RandomNumber = (props: IRandomNumber) => {
+  console.log("Hello >> ", props);
+  const onItemPress = () => {
+    if (!props.isDsabled) {
+      props.onSelect(props.id);
+    }
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello, world!</Text>
-      <Button title="Submit"></Button>
+      <TouchableOpacity onPress={()=>onItemPress()}>
+        <Text style={[styles.text, props.isDsabled && styles.isDisable]}>
+          {props.number}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -23,7 +32,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
     height: '100%',
   },
   text: {
@@ -32,5 +42,11 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     textAlign: 'center',
   },
+  isDisable: {
+    opacity: 0.3,
+  },
 });
 export default RandomNumber;
+// function onPress(id: number) {
+//   throw new Error('Function not implemented.');
+// }
