@@ -168,7 +168,7 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-        <Drawer.Screen name="TargetSum" component={TargetSum} />
+        <Drawer.Screen name="TargetSum"  options={{randomNumeberCount: 6}}  component={TargetSum} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

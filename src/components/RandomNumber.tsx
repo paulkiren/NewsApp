@@ -1,7 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 
-const RandomNumber = () => {
+export interface IRandomNumber  {
+  key:number;
+  id:number;
+  number:Array<number>;
+  isDsabled:boolean;
+  onPress:void;
+}
+
+const RandomNumber = (props:IRandomNumber) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hello, world!</Text>
