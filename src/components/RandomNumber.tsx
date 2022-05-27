@@ -35,11 +35,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 25,
     textAlign: 'center',
-    // backgroundColor: 'orange',
+    borderColor:'grey',
+    borderWidth:1,
+    borderRadius:5,
+    backgroundColor: 'lightorange',
   },
   isDisable: {
     opacity: 0.3,
-    color:'blue'
+    color:'blue',
+    backgroundColor: 'grey',
   },
 });
 export default RandomNumber;
