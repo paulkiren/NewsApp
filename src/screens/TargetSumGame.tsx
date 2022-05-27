@@ -11,7 +11,7 @@ export type ITargetSumProps = {
 export type ITargetSumState = {
   selectedIndex: Array<number>;
 };
-const randomNumeberCount = 7;
+const randomNumeberCount = 6;
 
 const styles = StyleSheet.create({
   container: {
@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
   randomContainer: {
     flex: 1,
     backgroundColor: '#FEFEFE',
+    flexWrap: 'wrap',
   },
   text: {
-    color: 'green',
-    fontSize: 60,
+    color: 'orange',
+    fontSize: 90,
     fontWeight: '100',
     textAlign: 'center',
   },
@@ -47,9 +48,12 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
   }
   isNumberSelected = (numberIndex: number) =>
     this.state.selectedIndex.includes(numberIndex);
-
+  calcSelectedNumberSum = () =>
+    this.state.selectedIndex.reduce((a, b) => a + this.randomNumbers[b], 0);
   selectNumber = (numberIndex: number) =>
-    this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
+   { this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
+  console.log("Sum ", this.calcSelectedNumberSum());
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -67,6 +71,7 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
             );
           })}
         </View>
+        <Text style={styles.text}>{this.targetValue}</Text>
       </View>
     );
   }

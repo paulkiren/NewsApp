@@ -10,15 +10,15 @@ export interface IRandomNumber {
 }
 
 const RandomNumber = (props: IRandomNumber) => {
-  console.log("Hello >> ", props);
   const onItemPress = () => {
+    console.log("Hello >> On click ", props);
     if (!props.isDsabled) {
       props.onSelect(props.id);
     }
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={()=>onItemPress()}>
+      <TouchableOpacity onPress={() => onItemPress()}>
         <Text style={[styles.text, props.isDsabled && styles.isDisable]}>
           {props.number}
         </Text>
@@ -30,23 +30,20 @@ const RandomNumber = (props: IRandomNumber) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   text: {
     color: 'green',
-    fontSize: 60,
-    fontWeight: '100',
-    textAlign: 'center',
+    fontSize: 66,
+    fontWeight: '300',
+    // backgroundColor: 'orange',
   },
   isDisable: {
     opacity: 0.3,
   },
 });
 export default RandomNumber;
-// function onPress(id: number) {
-//   throw new Error('Function not implemented.');
-// }
