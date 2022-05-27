@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList, Text, StyleSheet, StatusBar} from 'react-native';
 import GuardianApiServices from '../services/GuardianApiServices';
-// const Item = (title: string) => (
-//   <View style={styles.item}>
-//     <Text style={styles.title}>{title}</Text>
-//   </View>
-// );
 const Item = ({item}: {item: INewsData}) => {
-  console.log("MY Item ", item);
+  console.log('MY Item ', item);
+  const getDateValue = ''+item?.webPublicationDate;
   return (
+
     <View style={styles.item}>
       <Text style={styles.title}>{item.webTitle}</Text>
+      <Text style={styles.date}>{getDateValue}</Text>
+      <Text style={styles.id}>{item.id}</Text>
+      <Text style={styles.type}>{item.type}</Text>
     </View>
   );
 };
@@ -62,8 +62,15 @@ const HomeScreen = () => {
       });
   }, []);
   return (
-    <View   style={{flex: 1, backgroundColor: 'violet'}}>
-      <Text> {'Hello'} </Text>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'violet',
+      }}>
+      <View style={{justifyContent: 'center', alignContent: 'space-around'}}>
+        <Text> {'Guardian News'}</Text>
+      </View>
+
       <FlatList
         data={newsData}
         renderItem={renderItem}
@@ -87,8 +94,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 32,
+    fontSize: 16,
   },
+  date: {
+    fontSize:12,
+    color:'lightgreen'
+  },
+  id: {
+    fontSize:10,
+    color:'lightred'
+  },
+  type: {
+    fontSize:12,
+    color:'orange'
+  }
 });
 
 export default HomeScreen;
