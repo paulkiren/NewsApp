@@ -13,11 +13,15 @@ const styles = StyleSheet.create({
 type ITargetSumState = {
   gameId: number;
 };
-class TargetSum extends React.Component<{}, ITargetSumState> {
+type ITargetSumProps = {
+  gameId: number;
+};
+class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
   // state = {
   //   gameId: 1,
   // };
-  componentDidMount() {
+  constructor(props: ITargetSumProps | Readonly<ITargetSumProps>) {
+    super(props)
     this.state = {
       gameId: 1,
     };
