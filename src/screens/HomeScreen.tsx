@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   id: {
     fontSize:10,
-    color:'lightred'
+    color:'lightblue'
   },
   type: {
     fontSize:12,
