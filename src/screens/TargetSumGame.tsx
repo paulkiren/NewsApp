@@ -11,6 +11,11 @@ export type ITargetSumProps = {
 export type ITargetSumState = {
   selectedIndex: Array<number>;
 };
+enum IGameState {
+  playing = 'PLAYING',
+  won = 'WON',
+  lost = 'LOST',
+}
 const randomNumeberCount = 6;
 
 const styles = StyleSheet.create({
@@ -31,9 +36,14 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     textAlign: 'center',
   },
+  statusText: {
+    color: 'green',
+    fontSize: 20,
+    fontWeight: '100',
+    textAlign: 'center',
+  },
 });
 class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
-
   randomNumbers = Array.from({length: randomNumeberCount}).map(
     () => 1 + Math.floor(10 * Math.random()),
   );
@@ -47,14 +57,15 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
       selectedIndex: [],
     };
   }
+  gameStstus = IGameState.playing;
   isNumberSelected = (numberIndex: number) =>
     this.state.selectedIndex.includes(numberIndex);
   calcSelectedNumberSum = () =>
     this.state.selectedIndex.reduce((a, b) => a + this.randomNumbers[b], 0);
-  selectNumber = (numberIndex: number) =>
-   { this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
-  console.log("Sum _ ", this.calcSelectedNumberSum());
-  }
+  selectNumber = (numberIndex: number) => {
+    this.setState({selectedIndex: [...this.state.selectedIndex, numberIndex]});
+    console.log('Sum _ ', this.calcSelectedNumberSum());
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -67,11 +78,12 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
                 id={index}
                 number={randomNumber}
                 isDsabled={this.isNumberSelected(index)}
-                onSelect={this.selectNumber }
+                onSelect={this.selectNumber}
               />
             );
           })}
         </View>
+        <Text style={styles.statusText}>{this.gameStstus}</Text>
         <Text style={styles.text}>{this.calcSelectedNumberSum()}</Text>
       </View>
     );

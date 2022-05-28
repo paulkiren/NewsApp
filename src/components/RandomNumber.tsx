@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderColor:'grey',
     borderWidth:1,
     borderRadius:5,
-    backgroundColor: 'lightorange',
+    backgroundColor: 'pink',
   },
   isDisable: {
     opacity: 0.3,
