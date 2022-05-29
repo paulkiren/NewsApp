@@ -180,8 +180,8 @@ class Game extends React.Component<ITargetSumGameProps, ITargetSumGameState> {
             );
           })}
         </View>
-        <Text>{this.state.remainingSeconds}</Text>
-        <Text style={styles.statusText}>{this.gameStatus}</Text>
+        <Text style ={styles.statusText }>{this.state.remainingSeconds}</Text>
+        <Text style={styles.statusText }>{this.gameStatus}</Text>
         {this.gameStatus !== 'PLAYING' && (
           <Button title="Play Again" onPress={this.props.onPlayAgain} />
         )}
