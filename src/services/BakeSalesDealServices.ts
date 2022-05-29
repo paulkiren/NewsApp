@@ -1,8 +1,17 @@
+const apiHost = 'https://bakesaleforgood.com';
 const BakeSalesDealsApi = {
-  getDealsFromApi: () => {
-    return fetch(
-      'https://content.guardianapis.com/search?q=debate%20AND%20NOT%20immigration&tag=politics/politics&from-date=2014-01-01&api-key=test',
-    )
+  getInitialDealsFromApi: () => {
+    return fetch(apiHost + '/api/deals')
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
+  getDealDetailFromApi: (dealId: string) => {
+    return fetch(apiHost + '/api/deals/' + dealId)
       .then(response => response.json())
       .then(json => {
         return json;
