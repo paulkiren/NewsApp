@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import ajax from '../../services/BakeSalesDealServices';
 
 import {priceDisplay} from '../../utils/common';
 type IDealsDetailProp = {
   initialDealData: any;
+  onBcakPress:any;
 };
 type IDealsDetailState = {
   deal: any;
@@ -23,10 +24,14 @@ class DealsDetail extends React.Component<IDealsDetailProp, IDealsDetailState> {
       deal: fullDeal,
     });
   }
+  
   render() {
     const {deal} = this.state;
     return (
       <View style={styles.deal}>
+        <TouchableOpacity onPress={this.props.onBcakPress}>
+          <Text style={styles.back}>{'< Back'}</Text>
+        </TouchableOpacity>
         <Image source={{uri: deal.media[0]}} style={styles.image} />
         <View style={styles.detail}>
           <View>
@@ -54,18 +59,26 @@ class DealsDetail extends React.Component<IDealsDetailProp, IDealsDetailState> {
 }
 
 const styles = StyleSheet.create({
+  back:{
+    color:'orange',
+    fontSize:18,
+    padding:5,
+    minHeight:25,
+
+  },
   deal: {
     marginHorizontal: 12,
-    marginTop: 50,
-    borderColor: '#bbb',
-    borderWidth: 1,
+    marginTop: 12,
   },
   image: {
     width: '100%',
     height: 150,
     backgroundColor: '#ccc',
   },
-  detail: {},
+  detail: {
+    borderColor: '#bbb',
+    borderWidth: 1,
+  },
   title: {
     fontSize: 16,
     padding: 10,

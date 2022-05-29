@@ -64,9 +64,14 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
   currentDeal = () => {
     return this.state.deals.find(deal => deal.key === this.state.currentDealId);
   };
+  onBackPress = () => {
+    this.setState({
+      currentDealId: null,
+    });
+  }
   render() {
     if (this.state.currentDealId) {
-      return <DealsDetail  initialDealData={this.currentDeal()} />;
+      return <DealsDetail  initialDealData={this.currentDeal()} onBcakPress={this.onBackPress} />;
     }
     if (this.state.deals.length > 0) {
       return (
