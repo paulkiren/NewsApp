@@ -23,7 +23,7 @@ class SearchBar extends React.Component<searchProps, searchState> {
       <TextInput
         style={styles.input}
         placeholder="Search Deals"
-        onTextInput={this.handleChange}
+        onChangeText={this.handleChange}
       />
     );
   }

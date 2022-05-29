@@ -40,26 +40,18 @@ export interface IDeals {
 type IDealsState = {
   deals: Array<IDeals>;
   currentDealId: null;
-  dealsFromSearch:Array<IDeals>;
+  dealsFromSearch: Array<IDeals>;
 };
 type IDealsProps = {
   currentDealId: null;
 };
 class BakeSale extends React.Component<IDealsProps, IDealsState> {
-  searchDeals:any = async (searchTerm: string) => {
-    let dealsFromSearch = [];
-    if (searchTerm) {
-      dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
-    }
-    this.setState({ dealsFromSearch });
-  };;
   constructor(props: IDealsProps | Readonly<IDealsProps>) {
     super(props);
     this.state = {
       deals: [],
       currentDealId: null,
-      dealsFromSearch:[]
-      
+      dealsFromSearch: [],
     };
   }
   async componentDidMount() {
@@ -75,22 +67,41 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
   currentDeal = () => {
     return this.state.deals.find(deal => deal.key === this.state.currentDealId);
   };
-  onBackPress = () => {
+  unsetCurrentDeal = () => {
     this.setState({
       currentDealId: null,
     });
-  }
+  };
+  searchDeals = async (searchTerm: string) => {
+    let dealsFromSearch = [];
+    if (searchTerm) {
+      console.log('Search Term', searchTerm);
+      dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
+      console.log('dealsFromSearch ::::: ', dealsFromSearch);
+    }
+    this.setState({dealsFromSearch});
+  };
   render() {
     if (this.state.currentDealId) {
-      return <DealsDetail  initialDealData={this.currentDeal()} onBcakPress={this.onBackPress} />;
-    }
-    if (this.state.deals.length > 0) {
       return (
-
         <View style={styles.main}>
-        <SearchBar searchDeals={this.searchDeals} />
-      
-        <DealsList deals={this.state.deals} onItemPress={this.setCurrentDeal} />
+          <DealsDetail
+            initialDealData={this.currentDeal()}
+            onBcakPress={this.unsetCurrentDeal}
+          />
+        </View>
+      );
+    }
+    const dealsToDisplay =
+      this.state.dealsFromSearch.length > 0
+        ? this.state.dealsFromSearch
+        : this.state.deals;
+
+    if (dealsToDisplay.length > 0) {
+      return (
+        <View style={styles.main}>
+          <SearchBar searchDeals={this.searchDeals} />
+          <DealsList deals={dealsToDisplay} onItemPress={this.setCurrentDeal} />
         </View>
       );
     }
@@ -107,6 +118,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  main: {
+    marginTop: 30,
   },
   header: {
     fontSize: 40,
