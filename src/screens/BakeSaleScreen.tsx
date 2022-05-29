@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {View, StyleSheet} from 'react-native';
-import BakeSale from '../components/BakeSale';
+import BakeSale from '../components/BakeSaleDeal/BakeSale';
 
 const styles = StyleSheet.create({
   container: {

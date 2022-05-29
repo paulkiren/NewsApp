@@ -1,12 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
+import DealsDetails from './DealsDetails';
+import DealsList from './DealsList';
 
 
  const BakeSale = ()=> {
   return (
     <View style={styles.container}>
      
-      <Text style={styles.text}>Hello, world!</Text>
+      <Text style={styles.text}>Deals</Text>
+      <DealsList/>
+      <DealsDetails/>
   
       <Button title='Submit'></Button>
     </View>
