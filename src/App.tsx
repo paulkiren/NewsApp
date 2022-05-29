@@ -139,6 +139,7 @@ import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import TargetSumGameScreen from './screens/TargetSumGameScreen';
+import BakeSaleScreen from './screens/BakeSaleScreen';
 const Tab = createBottomTabNavigator();
 
 // function HomeScreen({ navigation }) {
@@ -169,6 +170,7 @@ export default function App() {
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
         <Drawer.Screen name="Target Sum Game Screen" component={TargetSumGameScreen} />
+        <Drawer.Screen name="Bake Sales" component={BakeSaleScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
