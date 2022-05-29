@@ -16,7 +16,7 @@ type ITargetSumState = {
 type ITargetSumProps = {
   gameId: number;
 };
-class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
+class TargetSumGameScreen extends React.Component<ITargetSumProps, ITargetSumState> {
   // state = {
   //   gameId: 1,
   // };
@@ -45,4 +45,4 @@ class TargetSum extends React.Component<ITargetSumProps, ITargetSumState> {
   }
 }
 
-export default TargetSum;
+export default TargetSumGameScreen;
