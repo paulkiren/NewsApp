@@ -4,6 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import ajax from '../../services/BakeSalesDealServices';
 import DealsList from './DealsList';
 import DealsDetail from './DealsDetail';
+import SearchBar from './SearchBar';
 export interface Cause {
   name: string;
 }
@@ -39,16 +40,26 @@ export interface IDeals {
 type IDealsState = {
   deals: Array<IDeals>;
   currentDealId: null;
+  dealsFromSearch:Array<IDeals>;
 };
 type IDealsProps = {
   currentDealId: null;
 };
 class BakeSale extends React.Component<IDealsProps, IDealsState> {
+  searchDeals:any = async (searchTerm: string) => {
+    let dealsFromSearch = [];
+    if (searchTerm) {
+      dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
+    }
+    this.setState({ dealsFromSearch });
+  };;
   constructor(props: IDealsProps | Readonly<IDealsProps>) {
     super(props);
     this.state = {
       deals: [],
       currentDealId: null,
+      dealsFromSearch:[]
+      
     };
   }
   async componentDidMount() {
@@ -75,7 +86,12 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
     }
     if (this.state.deals.length > 0) {
       return (
+
+        <View style={styles.main}>
+        <SearchBar searchDeals={this.searchDeals} />
+      
         <DealsList deals={this.state.deals} onItemPress={this.setCurrentDeal} />
+        </View>
       );
     }
     return (
@@ -98,38 +114,3 @@ const styles = StyleSheet.create({
 });
 
 export default BakeSale;
-
-// import React from 'react';
-// import {StyleSheet, Text, View, Button} from 'react-native';
-// import DealsDetails from './DealsDetails';
-// import DealsList from './DealsList';
-
-//  const BakeSale = ()=> {
-//   return (
-//     <View style={styles.container}>
-
-//       <Text style={styles.text}>Deals</Text>
-//       <DealsList/>
-//       <DealsDetails/>
-
-//       <Button title='Submit'></Button>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'white',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     height:'100%'
-//   },
-//   text: {
-//     color: 'green',
-//     fontSize: 60,
-//     fontWeight: '100',
-//     textAlign: 'center',
-//   },
-// });
-// export default BakeSale;
