@@ -43,7 +43,7 @@ type IDealsState = {
   dealsFromSearch: Array<IDeals>;
 };
 type IDealsProps = {
-  currentDealId: null;
+
 };
 class BakeSale extends React.Component<IDealsProps, IDealsState> {
   constructor(props: IDealsProps | Readonly<IDealsProps>) {
