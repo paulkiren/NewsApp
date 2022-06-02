@@ -14,6 +14,13 @@ describe('Bake Sales  Screen', () => {
    renderer.create(<BakeSale  />);
 
  });
-
+ it('renders as expected', () => {
+  //when
+  const wrapper = shallow(
+      <BakeSale />
+  );
+  //expect
+  expect(wrapper).toMatchSnapshot();
+});
 });
  

@@ -74,7 +74,7 @@ const HomeScreen = () => {
       <FlatList
         data={newsData}
         renderItem={renderItem}
-        style={{flex: 1, backgroundColor: 'yellow'}}
+        style={{flex: 1, backgroundColor: 'lightblue'}}
         keyExtractor={item => item.id}
         refreshing={isLoadingData}
       />
