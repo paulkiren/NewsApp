@@ -3,6 +3,7 @@ import {StyleSheet, TextInput, View} from 'react-native';
 import debounce from 'lodash.debounce';
 type searchProps = {
   searchDeals: any;
+  initialSearchTerm:string;
 };
 type searchState = {
   searchTerm: string;
@@ -10,7 +11,7 @@ type searchState = {
 class SearchBar extends React.Component<searchProps, searchState> {
   constructor(props: searchProps | Readonly<searchProps>) {
     super(props);
-    this.state = {searchTerm: ''};
+    this.state = {searchTerm: props.initialSearchTerm};
   }
   debouncedSearchDeals = debounce(this.props.searchDeals, 300);
   handleChange = (searchTerm: any) => {
