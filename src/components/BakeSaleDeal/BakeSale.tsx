@@ -41,10 +41,9 @@ type IDealsState = {
   deals: Array<IDeals>;
   currentDealId: null;
   dealsFromSearch: Array<IDeals>;
+  activeSearchTerm:string;
 };
-type IDealsProps = {
-
-};
+type IDealsProps = {};
 class BakeSale extends React.Component<IDealsProps, IDealsState> {
   constructor(props: IDealsProps | Readonly<IDealsProps>) {
     super(props);
@@ -52,6 +51,7 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
       deals: [],
       currentDealId: null,
       dealsFromSearch: [],
+      activeSearchTerm:'',
     };
   }
   async componentDidMount() {
@@ -79,7 +79,7 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
       dealsFromSearch = await ajax.fetchDealSearchResults(searchTerm);
       console.log('dealsFromSearch ::::: ', dealsFromSearch);
     }
-    this.setState({dealsFromSearch});
+    this.setState({dealsFromSearch, activeSearchTerm:searchTerm});
   };
   render() {
     if (this.state.currentDealId) {
@@ -100,7 +100,8 @@ class BakeSale extends React.Component<IDealsProps, IDealsState> {
     if (dealsToDisplay.length > 0) {
       return (
         <View style={styles.main}>
-          <SearchBar searchDeals={this.searchDeals} />
+          <SearchBar searchDeals={this.searchDeals}     
+           initialSearchTerm={this.state.activeSearchTerm} />
           <DealsList deals={dealsToDisplay} onItemPress={this.setCurrentDeal} />
         </View>
       );
