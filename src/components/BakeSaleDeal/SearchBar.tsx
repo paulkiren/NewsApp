@@ -9,11 +9,16 @@ type searchState = {
   searchTerm: string;
 };
 class SearchBar extends React.Component<searchProps, searchState> {
+  inputElement: TextInput | null | undefined | null;
   constructor(props: searchProps | Readonly<searchProps>) {
     super(props);
     this.state = {searchTerm: props.initialSearchTerm};
   }
-  debouncedSearchDeals = debounce(this.props.searchDeals, 300);
+  searchDeals = (searchTerm:string) => {
+    this.props.searchDeals(searchTerm);
+    this.inputElement?.blur();
+  }
+  debouncedSearchDeals = debounce(this.searchDeals, 300);
   handleChange = (searchTerm: any) => {
     this.setState({searchTerm}, () => {
       this.debouncedSearchDeals(this.state.searchTerm);
@@ -22,6 +27,7 @@ class SearchBar extends React.Component<searchProps, searchState> {
   render() {
     return (
       <TextInput
+      ref={(inputElement) => { this.inputElement = inputElement; }}
         style={styles.input}
         placeholder="Search Deals"
         onChangeText={this.handleChange}
