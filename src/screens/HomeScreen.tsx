@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {View, FlatList, Text, StyleSheet, StatusBar} from 'react-native';
 import GuardianApiServices from '../services/GuardianApiServices';
 const Item = ({item}: {item: INewsData}) => {
-  console.log('MY Item ', item);
   const getDateValue = ''+item?.webPublicationDate;
   return (
 
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#E6E6FA',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
